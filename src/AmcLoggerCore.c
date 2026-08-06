@@ -250,6 +250,11 @@ io_fail:
 
 /* ---- lifecycle ---- */
 
+int amc_logger_is_initialized(void)
+{
+    return atomic_load_explicit(&g_amc.state, memory_order_acquire) == AMC_READY;
+}
+
 int amc_logger_init(const char *config_path)
 {
     char err[512];

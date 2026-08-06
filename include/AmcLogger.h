@@ -52,6 +52,9 @@ int amc_logger_init(const char *config_path); /* NULL = built-in defaults (empty
                                                  A failed init leaves the library
                                                  uninitialized and may be retried.     */
 int amc_logger_shutdown(void);                /* drain, join, flush, close; idempotent */
+int amc_logger_is_initialized(void);          /* 1 iff init succeeded and shutdown has not run —
+                                                 lets an idempotent orchestrator (e.g. a global
+                                                 init) skip a second init instead of failing it */
 int amc_logger_flush(void);                   /* block until everything accepted before
                                                  the call is written and fflushed;
                                                  -1 if the library is not initialized  */
